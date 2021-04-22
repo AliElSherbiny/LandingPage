@@ -37,7 +37,7 @@ function Showup(evt)
 { 
   for (const SectionElement of sectionsList) 
   {
-       if(evt.target.textContent.trim() === SectionElement.textContent.trim()) 
+       if(evt.target.textContent.trim() === SectionElement.textContent.trim()) //using event.target to get the li elements 
       {
           SectionElement.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"}); //scrolling to the section if condition above is true
       }
@@ -50,15 +50,15 @@ function Glowup()
 { 
   for ( let index=0;index<sectionsList.length;index++)
   {
-    if (500 >= sectionsList[index].getBoundingClientRect().top && 0 <= sectionsList[index].getBoundingClientRect().top)
+    if (500 >= sectionsList[index].getBoundingClientRect().top && 0 <= sectionsList[index].getBoundingClientRect().top) //500 is an expiremental number , can be assigned to a var for scalability
     {
-      navList.childNodes[index].classList.add("glow");
+      navList.childNodes[index].classList.add("glow"); //adding the glow class to the active list element
     }
     else
     {
-      if (navList.childNodes[index].classList.contains("glow"))
+      if (navList.childNodes[index].classList.contains("glow")) 
         {
-          navList.childNodes[index].classList.remove("glow");
+          navList.childNodes[index].classList.remove("glow"); //removing the glow class from inactive list elements
         }
     }
   }
@@ -69,6 +69,7 @@ function Glowup()
  * 
 */
 
+/*Updating styles for navbar and nav list "ul" inside it */
 parentClass.style.backgroundColor =  "rgb(136,203,171)";
 parentClass.style.textAlign = "center";
 navList.style.fontSize ="20pt";
@@ -76,6 +77,8 @@ navList.style.fontStyle = "bold";
 navList.style.textAlign="center";
 navList.style.alignItems = "center";
 let navElement;
+
+/*Adding sections "li" elements and naming them based on the number of sections in the HTML */
 for (const SectionElement of sectionsList) {
 
     navElement = navList.appendChild( document.createElement('li'));
@@ -90,7 +93,7 @@ for (const SectionElement of sectionsList) {
     
   }
  
-
+/*calling the 2 asynchronous event listener functions*/
   navList.addEventListener('click',Showup);
   document.addEventListener('scroll',Glowup);
 

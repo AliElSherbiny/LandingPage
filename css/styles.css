@@ -108,9 +108,13 @@ section {
     color: #fff;
 }
 
+/*Adding the class that represent the highlight behind the active section*/
 .glow {
 background-color: #cc1;
-
+border-bottom-left-radius: 40% 40%;
+border-bottom-right-radius: 40% 40%;
+border-top-right-radius: 40% 40%;
+border-top-left-radius: 40% 40%;
 
 }
 

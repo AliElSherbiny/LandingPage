@@ -20,9 +20,11 @@
 
 /*getting all the sections in the HTML , the secions lie under class element landing__container and then the tag element h2*/ 
 const sectionsList = document.querySelectorAll('.landing__container h2'); /*returns node list of 4 elemts*/ 
-
+/* get the parent element for our "ul" representing the navbar element */
 const parentClass = document.querySelector('.navbar__menu'); //change parent class style
-const navList = document.createElement('ul');
+
+/*creating the ul element*/
+let navList = document.createElement('ul');
 parentClass.appendChild(navList) ; 
 /**
  * End Global Variables
@@ -30,37 +32,34 @@ parentClass.appendChild(navList) ;
  * 
 */
 
+/*Description: Function used to scroll to the specific section when this section is clicked in nav list*/ 
 function Showup(evt)
 { 
   for (const SectionElement of sectionsList) 
   {
        if(evt.target.textContent.trim() === SectionElement.textContent.trim()) 
       {
-          SectionElement.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
-          //console.log(SectionElement.textContent.trim());
-          //console.log(evt.target.textContent.trim());
-          //console.log (SectionElement.textContent.trim() === evt.target.textContent.trim() );
+          SectionElement.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"}); //scrolling to the section if condition above is true
       }
   }
 
 }
 
+/*Description: function to highlight the active section by adding the section name in navlist to a "glow" class */
 function Glowup()
 { 
-  let currPos = document.documentElement.scrollTop;
-  let index = 0;
-  //console.log("hi");
-  for ( index=0;index<sectionsList.length;index++)//index in sectionsList) 
-  {currPos = document.documentElement.scrollTop;
-    //if ((currPos >= (sectionsList[index].offsetTop)*(index+1)) && (currPos < (sectionsList[index].offsetHeight + sectionsList[index].offsetTop*(index+1))))
+  for ( let index=0;index<sectionsList.length;index++)
+  {
     if (500 >= sectionsList[index].getBoundingClientRect().top && 0 <= sectionsList[index].getBoundingClientRect().top)
-    {//console.log(index);
+    {
       navList.childNodes[index].classList.add("glow");
     }
     else
-    {//console.log(sectionsList[index]);
+    {
       if (navList.childNodes[index].classList.contains("glow"))
-      {navList.childNodes[index].classList.remove("glow");}
+        {
+          navList.childNodes[index].classList.remove("glow");
+        }
     }
   }
 }

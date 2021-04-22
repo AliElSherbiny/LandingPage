@@ -47,13 +47,16 @@ navList.style.fontStyle = "bold";
 navList.style.textAlign="center";
 //navList.style.border = "10px solid black";
 navList.style.alignItems = "center";
-
+let navElement;
 for (const SectionElement of sectionsList) {
     //create element unordered list
     // create element list of class header
     //text within the element = section element
-    let navElement = navList.appendChild( document.createElement('li'));
-    navElement.textContent= SectionElement.textContent;
+    navElement = navList.appendChild( document.createElement('li'));
+    navElement.innerHTML = "&nbsp;";
+    navElement.innerHTML += "&nbsp;";
+    navElement.textContent= SectionElement.textContent;  
+    navElement.innerHTML += "&nbsp;";
     navElement.innerHTML += "&nbsp;";
     navElement.style.border = "10px none black";
     navElement.style.display= "inline-block";
@@ -78,6 +81,64 @@ for (const SectionElement of sectionsList) {
   }
 
   navList.addEventListener('click',Showup);
+
+
+
+
+
+
+
+
+
+
+
+
+  //create class with the BG options
+  //add an event on scrolling when he scroll we run the function that calcs the position of sections
+  // the section that meets , his nav button shall be added to the class and others removed from the class.
+
+  function Glowup()
+  { 
+    let currPos = document.documentElement.scrollTop;
+    let index = 0;
+    //console.log("hi");
+    for ( index=0;index<sectionsList.length;index++)//index in sectionsList) 
+    {currPos = document.documentElement.scrollTop;
+      //if ((currPos >= (sectionsList[index].offsetTop)*(index+1)) && (currPos < (sectionsList[index].offsetHeight + sectionsList[index].offsetTop*(index+1))))
+      if (500 >= sectionsList[index].getBoundingClientRect().top && 0 <= sectionsList[index].getBoundingClientRect().top)
+      {//console.log(index);
+        navList.childNodes[index].classList.add("glow");
+      }
+      else
+      {//console.log(sectionsList[index]);
+        if (navList.childNodes[index].classList.contains("glow"))
+        {navList.childNodes[index].classList.remove("glow");}
+      }
+    }
+/*
+      //if ((currPos > (SectionElement.offsetTop)) && (currPos < (SectionElement.offsetHeight)))
+      //{
+        //console.log("hi");
+        for (let i ;  i<navList.childNodes.length; i++)
+        {if (navList.childNodes[i].textContent.trim() === SectionElement.textContent.trim()) 
+        navList.childNodes[i].classList.add("glow");
+        else 
+        navList.childNodes[i<navList.childNodes.length-i].classList.add("glow");}
+      //}
+      //else
+      //{
+       // SectionElement.classList.remove(glow);
+      //}
+    }
+*/
+  }
+
+  document.addEventListener('scroll',Glowup);
+
+
+
+
+
 /*
   parentClass.addEventListener('click',  event => {
     x.scrollIntoView(true);
